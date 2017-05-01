@@ -1,0 +1,46 @@
+@charset "utf-8";
+/* CSS Document */
+body{font-family:'microsoft yahei',Verdana, Geneva, sans-serif;}
+.clearFix{zoom:1;}
+.clearFix:after{clear:both;display:table;box-sizing:border-box;}
+
+a:hover{text-decoration:none;}
+.bl-container{width:1320px;padding:0 20px;min-height:1000px;}
+.navbar{border-width:0;background:#000000;border-radius:0;margin-bottom:0;}
+.navbar-header{padding:11px 25px;min-height:90px;background:#212121;}
+.navbar-brand{text-indent:-999px;}
+.navbar-default .navbar-brand{background:url(../images/css-spd.png) 0 0 no-repeat;width:205px;height:68px;}
+.navbar-default .navbar-nav li a,
+.navbar-default .navbar-nav li a:focus{min-height:90px;line-height:90px;padding:0 25px;color:#646464;-webkit-transition:all 0.5s;transition:all 0.5s;}
+.navbar-default .navbar-nav li.active a, 
+.navbar-default .navbar-nav li.active a:hover, 
+.navbar-default .navbar-nav li a:hover,
+.navbar-default .navbar-nav li.active a:focus{background:none;color:#fff;}
+.bl-left-tag{position:relative;}
+.bl-left-tag:before{position:absolute;top:0;left:-20px;width:20px;content:'';background:#00a0e9;width:20px;height:90px;}
+
+.text-f14{font-size:14px;}
+.text-f16{font-size:16px;}
+
+
+.footer{background:#1f1d20;}
+.footer-wrap{position:relative;width:1280px;margin:0 auto;background:url(../images/i-bg04.jpg) center 0 no-repeat;background-size:cover;min-height:800px;}
+.footer-content{width:680px;height:680px;position:absolute;left:50%;top:50%;margin:-340px 0 0 -340px;background:#fff;border-radius:100%;background:#fff;}
+.footer-content .left,
+.footer-content .right{width:50%;box-sizing:border-box;}
+.footer-content .left h3{font-size:26px;line-height:1.4em;}
+.footer-content .left{padding:260px 0 0 50px;}
+.footer-content .right{padding:160px 50px 0 30px;font-size:16px;}
+.footer-content .right{}
+.footer-content .right .tel{color:#00a0e9;font-size:30px;line-height:1em;}
+.footer-content .right .links{margin-left:-30px;margin-bottom:40px;}
+.footer-content .right .links a{font-size:14px;color:#000;display:inline-block;padding:0 30px;}
+.footer-content .right .name,
+.footer-content .right .email,
+.footer-content .right .addr{margin-bottom:0;line-height:1.2em;}
+.footer-content .right .copy{font-size:12px;color:#999;line-height:1.4em;margin-top:40px;}
+
+
+
+
+
