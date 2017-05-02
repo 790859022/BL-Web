@@ -1,5 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
+a{-webkit-transition:all 0.5s;transition:all 0.5s;}
 .index-container{}
 .banner-layer{height:700px;}
 

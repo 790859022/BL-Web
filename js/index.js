@@ -26,7 +26,7 @@ var indexPage = {
                 })
 
                 if (currentPosTop <= (scrollTop + winH)) {
-                    var _top = (scrollTop + winH - currentPosTop) / 5 * -1;
+                    var _top = (scrollTop + winH - currentPosTop) / 4 * -1;
                     $text.css({
                         opacity: 1,
                         top: _top
@@ -152,17 +152,6 @@ $(function() {
         autoplay: '3000'
     });
 
-
-    // var swiper = new Swiper('.partner .swiper-container', {
-    //     pagination: '.swiper-pagination',
-    //     slidesPerView: 4,
-    //     paginationClickable: true,
-    //     spaceBetween: 110,
-    //     nextButton: '.swiper-button-next',
-    //     prevButton: '.swiper-button-prev',
-    //     loop:true
-    // });
-
     var swiper = new Swiper('.partner .swiper-container', {
         // pagination: '.swiper-pagination',
         nextButton: '.swiper-button-next',
@@ -172,7 +161,5 @@ $(function() {
         spaceBetween: 110,
         loop: true
     });
-    
-
 
 });
