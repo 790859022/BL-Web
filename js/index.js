@@ -76,13 +76,14 @@ var indexPage = {
         function _navScroll() {
             var scrollTop = $(window).scrollTop();
             var navH = _this.nav.height();
+            console.log(scrollTop);
             if (scrollTop > navH) {
                 _this.nav.css({
                     position: 'fixed',
                     zIndex: 2,
-                    top: '-90px'
-                })
+                    top: '-90px',
 
+                })
             } else {
                 _this.nav.css({
                     position: 'absolute',
@@ -91,10 +92,12 @@ var indexPage = {
                 })
             }
         }
-        // _navScroll();
+        _navScroll();
         $(document).bind('mousewheel', function(event, delta, deltaX, deltaY) {
             var scrollTop = $(window).scrollTop();
             var navH = _this.nav.height();
+			_navScroll();
+
             if (delta > 0) {
                 _this.nav.removeClass('navUp').addClass('navDown');
             } else {
@@ -144,21 +147,32 @@ $(function() {
     var swiper = new Swiper('.business .img .swiper-container', {
         pagination: '.swiper-pagination',
         paginationClickable: '.swiper-pagination',
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
         spaceBetween: 30,
         effect: 'fade',
         autoplay: '3000'
     });
 
 
+    // var swiper = new Swiper('.partner .swiper-container', {
+    //     pagination: '.swiper-pagination',
+    //     slidesPerView: 4,
+    //     paginationClickable: true,
+    //     spaceBetween: 110,
+    //     nextButton: '.swiper-button-next',
+    //     prevButton: '.swiper-button-prev',
+    //     loop:true
+    // });
+
     var swiper = new Swiper('.partner .swiper-container', {
-        pagination: '.swiper-pagination',
+        // pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
         slidesPerView: 4,
         paginationClickable: true,
         spaceBetween: 110,
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev'
+        loop: true
     });
+    
+
 
 });
