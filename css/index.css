@@ -1,5 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
+.index-container{}
 .banner-layer{height:700px;}
 
 .banner-layer{position:relative;overflow:hidden;}
