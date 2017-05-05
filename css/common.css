@@ -27,7 +27,7 @@ a:hover{text-decoration:none;}
 .text-f16{font-size:16px;}
 
 
-.footer{background:#1f1d20;}
+.footer{background:#1f1d20;min-width: 1320px;}
 .footer-wrap{position:relative;width:1280px;margin:0 auto;background:url(../images/i-bg04.jpg) center 0 no-repeat;background-size:cover;min-height:800px;}
 .footer-content{width:680px;height:680px;position:absolute;left:50%;top:50%;margin:-340px 0 0 -340px;background:#fff;border-radius:100%;background:#fff;}
 .footer-content .left,
@@ -66,7 +66,7 @@ a:hover{text-decoration:none;}
 .navbar-default .navbar-nav li.phone-li{display: none;}
 @media screen and (max-width: 1024px){
 	.bl-container,
-
+	.footer{min-width:initial;}
 	.footer-wrap{width: 100%;-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;}

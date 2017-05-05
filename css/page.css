@@ -1,0 +1,34 @@
+.pro-list-bg{width: 100%;height: 350px;position: relative;background:url(../images/l-img1.jpg) center 0 no-repeat;}
+.pro-list-bg .text{position:absolute;background: #eceae9;width: 500px;height: 300px;right: 30px;top: 20px;padding: 40px;-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;}
+.pro-list-bg .text .en,
+.pro-list-bg .text .ch{display: block;font-size: 50px;line-height: 1.4em;}
+.pro-list-type li{cursor:pointer;float: left;font-size: 22px;line-height: 2em;width: 33.333%;text-align: center;padding: 30px 0;margin: 0;}
+.pro-list-type li span{position: relative;}
+.pro-list-type li.active span:before{content: '▪';color: #00a0e9;font-size: 30px;line-height: 1em;position: absolute;left: 0;top: 50%;margin:-15px 0 0 -20px;}
+
+.pro-list-type .type-list{display: none;padding: 30px 20px;background: #000;color: #fff;font-size: 18px;line-height: 2em;}
+.pro-list-type .type-list .item{position: relative;cursor:pointer;display: inline-block;padding: 0 40px;}
+.pro-list-type .type-list .item.active:before{content: '▪';color: #00a0e9;font-size: 30px;line-height: 1em;position: absolute;left: 15px;top: 50%;margin:-17px 0 0 0;}
+
+.pro-list ul{margin: -5px -5px 30px;}
+.pro-list li{float: left;width: 50%;-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;padding: 5px;}
+.pro-list li a{display: block;width: 100%;overflow: hidden;position: relative;}
+.pro-list li a .name{position: absolute;left: 20px;top: 20px;font-size: 18px;color: #fff;}
+.pro-list li img{display: block;-webkit-transition: all 0.5s;
+-o-transition: all 0.5s;
+transition: all 0.5s;}
+.pro-list li img:hover{-webkit-transform: scale(1.1);
+-ms-transform: scale(1.1);
+-o-transform: scale(1.1);
+transform: scale(1.1);}
+
+
+
+
+
+
+
+
+

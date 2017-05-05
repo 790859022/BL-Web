@@ -71,40 +71,7 @@ var indexPage = {
             (!_this.about2.hasClass('show')) && scrollAbout2();
         });
     },
-    navScroll: function() {
-        var _this = this;
 
-        function _navScroll() {
-            var scrollTop = $(window).scrollTop();
-            var navH = _this.nav.height();
-            if (scrollTop > navH) {
-                _this.nav.css({
-                    position: 'fixed',
-                    zIndex: 2,
-                    top: '-90px',
-
-                })
-            } else {
-                _this.nav.css({
-                    position: 'absolute',
-                    zIndex: 2,
-                    top: '0'
-                })
-            }
-        }
-        _navScroll();
-        $(document).bind('mousewheel', function(event, delta, deltaX, deltaY) {
-            var scrollTop = $(window).scrollTop();
-            var navH = _this.nav.height();
-            _navScroll();
-
-            if (delta > 0) {
-                _this.nav.removeClass('navUp').addClass('navDown');
-            } else {
-                !(scrollTop >= _this.footer.position().top) && _this.nav.removeClass('navDown').addClass('navUp');
-            }
-        });
-    },
     partnerFunc: function() {
         var _this = this;
         var _spaceBetween = 100;
@@ -115,7 +82,6 @@ var indexPage = {
             _spaceBetween = 10;
             _slidesPerView = 3;
         }
-        console.log(commonJs.getBrowser());
         var swiper = new Swiper('.partner .swiper-container', {
             // pagination: '.swiper-pagination',
             nextButton: '.swiper-button-next',
@@ -127,35 +93,9 @@ var indexPage = {
         });
 
     },
-    footerPos: function() {
-        var _this = this;
-        var winH = $(window).height();
-        var footPosTop = _this.footer.position().top;
-        var scrollTop = $(window).scrollTop();
-
-        _this.footer.find('.footer-wrap').css({
-            height: winH
-        })
-        if (scrollTop >= footPosTop) {
-            _this.nav.css({
-                top: 0
-            })
-        }
-        $(window).bind('scroll', function() {
-            var winH = $(window).height();
-            var footPosTop = _this.footer.position().top;
-            var scrollTop = $(window).scrollTop();
-
-            if (scrollTop >= footPosTop) {
-                _this.nav.removeClass('navUp').addClass('navDown');
-            }
-        });
-    },
     bind: function() {
         var _this = this;
         _this.bannerScroll();
-        _this.navScroll();
-        _this.footerPos();
         _this.partnerFunc();
     },
     init: function() {
