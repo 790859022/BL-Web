@@ -169,7 +169,7 @@ transition:all 0.6s;
 
 .banner-layer .b-text .phone-big{display: none;}
 @media screen and (max-width:1024px){
-	.navbar:after{display: none;}
+	
 	.business ul a{min-height: 125px;}
 	.about-2{overflow: hidden;}
 	.partner .swiper-container{padding: 70px 0;}
@@ -196,7 +196,7 @@ transition:all 0.6s;
 	.banner-layer .b-text{}
 }
 @media screen and (max-width: 414px){
-	.bl-container{padding-left: 0;padding-right: 0;}
+	
 	.banner-layer{height: auto;}
 	.banner-layer .b-text,
 	.banner-layer .img-bg{position: static;width: 100%;min-height: 400px;padding: 0;margin: 0;-webkit-background-size: cover;
