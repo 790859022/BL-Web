@@ -34,6 +34,11 @@ a:hover{text-decoration:none;}
 .footer-content .right{width:50%;box-sizing:border-box;}
 .footer-content .left h3{font-size:26px;line-height:1.4em;}
 .footer-content .left{padding:260px 0 0 50px;}
+.footer-content .left .share{font-size: 0;margin-left: -8px;}
+.footer-content .left .share a{background:url(../images/css-spd.png) 0 -177px no-repeat;-webkit-background-size: 400px 400px; background-size: 400px 400px;width: 32px;height: 32px;display: inline-block;vertical-align: top;}
+.footer-content .left .share a.wx{background-position: 0 -212px;}
+.footer-content .left .share a.sina{background-position: 0 -248px;}
+
 .footer-content .right{padding:180px 50px 0 30px;font-size:16px;}
 .footer-content .right .p1{margin-bottom: 40px;}
 .footer-content .right .tel{color:#00a0e9;font-size:30px;line-height:1em;}
@@ -55,4 +60,63 @@ a:hover{text-decoration:none;}
 @keyframes navUp{
 	0%{top:0;}
 	100%{top:-90px;}
+}
+
+
+.navbar-default .navbar-nav li.phone-li{display: none;}
+@media screen and (max-width: 1024px){
+	.bl-container,
+
+	.footer-wrap{width: 100%;-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;}
+	.navbar{left: 20px;right: 0;width: auto;}
+	.nav-block{left: 0;right: 0;width: auto;}
+
+}
+@media screen and (max-width:768px)
+{
+	.navbar-default .navbar-nav li a, .navbar-default .navbar-nav li a:focus{padding: 0 10px;}
+
+}
+
+@media screen and (max-width:414px)
+{	
+	.navbar-default .navbar-nav li.phone-li{display: block;}
+	.banner-more{display: block !important;}
+
+	.navbar-header{padding: 11px 15px;}
+	.navbar-default .navbar-brand{width: 155px;height: 52px;margin-top: 8px;-webkit-background-size: 600px 600px; background-size: 600px 600px;}
+	.nav{float: none !important;-webkit-box-sizing: border-box;-moz-box-sizing: border-box; box-sizing: border-box;background: #00a0e9;padding: 20px 0;}
+	.navbar-default .navbar-toggle{border-width: 0;}
+	.navbar-default .navbar-toggle .icon-bar{height: 1px;}
+	.navbar-default .navbar-toggle .icon-bar:nth-child(3){width: 26px;}
+	.navbar-toggle .icon-bar+.icon-bar{margin-top: 6px;}
+	.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{background: none;}
+	.navbar-default .navbar-toggle{background: #00a0e9 !important;}
+	.navbar-default .navbar-toggle.collapsed{background: none !important;}
+	.navbar-default .navbar-toggle .icon-bar{background: #fff;}
+	.navbar-default .navbar-toggle.collapsed{background:none;}
+	.navbar-default .navbar-toggle.collapsed  .icon-bar{background: #999;}
+	.navbar-default .navbar-collapse, .navbar-default .navbar-form{border-top: none;}
+
+	.navbar-default .navbar-nav li a, .navbar-default .navbar-nav li a:focus{line-height:40px;min-height: auto;height: auto;text-align: left;text-indent: 40%;padding: 0;}
+	.navbar-default .navbar-nav li.active a, .navbar-default .navbar-nav li.active a:hover, .navbar-default .navbar-nav li a:hover, .navbar-default .navbar-nav li.active a:focus{color: #fff;}
+	.navbar-default .navbar-nav li{text-indent: 40%;}
+	.navbar-default .navbar-nav li.phone-li .tel{font-size: 20px;color: #fff;}
+	.navbar-default .navbar-nav li.phone-li .p1{font-size: 12px;font-weight: bold;}
+	.navbar-default .navbar-nav li.phone-li .share{font-size: 0;}
+	.navbar-default .navbar-nav li.phone-li .share a{margin-right: 10px;background:url(../images/css-spd.png) 0 -177px no-repeat;-webkit-background-size: 400px 400px; background-size: 400px 400px;width: 32px;height: 32px;display: inline-block;vertical-align: top;}
+	.navbar-default .navbar-nav li.phone-li .share a.wx{background-position: 0 -212px;}
+	.navbar-default .navbar-nav li.phone-li .share a.sina{background-position: 0 -248px;}
+	.navbar-default .navbar-nav{margin: 0 -15px;}
+	.navbar-toggle{margin-right: 0;margin-top: 17px;}
+	.footer-content{width: 90%;height: 370px;margin-top: -125px;margin-left: -45%;}
+	.footer-content .right{padding: 40px 10px 0 0;font-size: 12px;}
+	.footer-content .right .tel{font-size: 20px;}
+	.footer-content .left h3{font-size: 18px;font-weight: bold;}
+	.footer-content .left{padding: 120px 0 0 30px;}
+	.footer-content .right .copy{margin-top: 20px;}
+	.footer-content .right .p1{margin-bottom: 20px;}
+	
 }

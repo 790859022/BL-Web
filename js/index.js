@@ -1,4 +1,5 @@
 // JavaScript Document
+var clientType = commonJs.getBrowser();
 var indexPage = {
     dom: function() {
         var _this = this;
@@ -63,10 +64,10 @@ var indexPage = {
             })
         }
 
-        scrollBanner();
+        (clientType.pc != 'mobile') && scrollBanner();//非移动端执行动画
         scrollAbout2();
         $(window).bind('scroll', function() {
-            scrollBanner();
+            (clientType.pc != 'mobile') && scrollBanner();//非移动端执行动画
             (!_this.about2.hasClass('show')) && scrollAbout2();
         });
     },
@@ -76,7 +77,6 @@ var indexPage = {
         function _navScroll() {
             var scrollTop = $(window).scrollTop();
             var navH = _this.nav.height();
-            console.log(scrollTop);
             if (scrollTop > navH) {
                 _this.nav.css({
                     position: 'fixed',
@@ -96,50 +96,73 @@ var indexPage = {
         $(document).bind('mousewheel', function(event, delta, deltaX, deltaY) {
             var scrollTop = $(window).scrollTop();
             var navH = _this.nav.height();
-			_navScroll();
+            _navScroll();
 
             if (delta > 0) {
                 _this.nav.removeClass('navUp').addClass('navDown');
             } else {
-               !(scrollTop >= _this.footer.position().top) &&  _this.nav.removeClass('navDown').addClass('navUp');
+                !(scrollTop >= _this.footer.position().top) && _this.nav.removeClass('navDown').addClass('navUp');
             }
         });
     },
-    footerPos:function(){
-    	var _this = this;
-    	var winH = $(window).height();
-    	var footPosTop = _this.footer.position().top;
-    	var scrollTop = $(window).scrollTop();
+    partnerFunc: function() {
+        var _this = this;
+        var _spaceBetween = 100;
+        var _slidesPerView = 4;
+        if (clientType.pc == 'pad') {
+            _spaceBetween = 50;
+        } else if (clientType.pc == 'mobile') {
+            _spaceBetween = 10;
+            _slidesPerView = 3;
+        }
+        console.log(commonJs.getBrowser());
+        var swiper = new Swiper('.partner .swiper-container', {
+            // pagination: '.swiper-pagination',
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            slidesPerView: _slidesPerView,
+            paginationClickable: true,
+            spaceBetween: _spaceBetween,
+            loop: true
+        });
 
-    	_this.footer.find('.footer-wrap').css({
-    		height:winH
-    	})
-    	if(scrollTop >=footPosTop){
-    		_this.nav.css({
-    			top:0
-    		})
-    	}
-    	$(window).bind('scroll',function(){
-	    	var winH = $(window).height();
-	    	var footPosTop = _this.footer.position().top;
-	    	var scrollTop = $(window).scrollTop();
+    },
+    footerPos: function() {
+        var _this = this;
+        var winH = $(window).height();
+        var footPosTop = _this.footer.position().top;
+        var scrollTop = $(window).scrollTop();
 
-	    	if(scrollTop >=footPosTop){
-	    		_this.nav.removeClass('navUp').addClass('navDown');
-	    	}
-    	});
+        _this.footer.find('.footer-wrap').css({
+            height: winH
+        })
+        if (scrollTop >= footPosTop) {
+            _this.nav.css({
+                top: 0
+            })
+        }
+        $(window).bind('scroll', function() {
+            var winH = $(window).height();
+            var footPosTop = _this.footer.position().top;
+            var scrollTop = $(window).scrollTop();
+
+            if (scrollTop >= footPosTop) {
+                _this.nav.removeClass('navUp').addClass('navDown');
+            }
+        });
     },
     bind: function() {
         var _this = this;
         _this.bannerScroll();
         _this.navScroll();
         _this.footerPos();
+        _this.partnerFunc();
     },
     init: function() {
         var _this = this;
         _this.dom();
         _this.bind();
-        
+
     }
 }
 $(function() {
@@ -152,14 +175,6 @@ $(function() {
         autoplay: '3000'
     });
 
-    var swiper = new Swiper('.partner .swiper-container', {
-        // pagination: '.swiper-pagination',
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
-        slidesPerView: 4,
-        paginationClickable: true,
-        spaceBetween: 110,
-        loop: true
-    });
+
 
 });
