@@ -72,6 +72,7 @@ var aboutPage = {
 			var _type = $this.attr('data-type');
 
 			_this.partner.find('.hide-layer').hide(); 
+			$this.addClass('active').siblings().removeClass('active');
 			$('.'+_type).fadeIn();
 		});
 	},
@@ -84,3 +85,16 @@ var aboutPage = {
 	}
 }
 aboutPage.init();
+
+
+
+
+
+
+
+
+
+
+
+
+

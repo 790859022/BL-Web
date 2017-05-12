@@ -177,8 +177,6 @@ transition:all 0.6s;
 }
 
 @media screen and (max-width:768px){
-	.about-2 .item{width: 25%;-webkit-background-size: 100%;
-	background-size: 100%;}
 	.business .img .t{font-size: 30px;}
 	.business ul a{min-height: 95px;font-size: 16px;}
 	.business ul a .name{height: 50px;margin-top: -25px;}
@@ -186,6 +184,7 @@ transition:all 0.6s;
 	.partner .swiper-container{padding: 30px 0;}
 	
 	.about-2{height: 680px;}
+	.about-2 .item{width: 25%;-webkit-background-size: 100%; background-size: 100%;}
 	.about-2 .item{width: 40%;margin-left: 0;margin-left: -20%;margin-top: -135px;}
 	.about-2.show .item-1{margin-left: -42%;margin-top: -285px;-webkit-animation: null 2s forwards;animation: null 2s forwards;}
 	.about-2.show .item-2{margin-left: 2%;margin-top: -285px;-webkit-animation: null 1s forwards;animation: null 1s forwards;}
@@ -240,7 +239,6 @@ transition:all 0.6s;
 	.about-2.show .item-4{margin-left: -5%;margin-top: 4px;}
 	.about-2 .item .num{font-size: 36px;margin-top: -50px;}
 	.about-2 .item .text{font-size: 20px;}
-
 	.about-2.show .item{opacity:1;}
 	
 
