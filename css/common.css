@@ -7,10 +7,12 @@ body{font-family:'microsoft yahei',Verdana, Geneva, sans-serif;}
 a:hover{text-decoration:none;}
 .bl-container{width:1320px;padding:0 20px;min-height:1000px;padding-top: 90px;position: relative;}
 .nav-block,
-.navbar{position: absolute;top: 0;width: 1280px;height: 90px;border-width:0;background:#000000;border-radius:0;margin-bottom:0;}
+.navbar{position: absolute;z-index: 2;top: 0;width: 1280px;height: 90px;border-width:0;background:#000000;border-radius:0;margin-bottom:0;}
 .navbar:after{content: '';position: absolute;left: 420px;top: 0;bottom: 0;display: block;margin-left: -1px;border-left: 1px solid #fff;}
-.navbar.navDown{position: fixed;z-index: 2;opacity:1;-webkit-animation: navDown 0.4s forwards;animation: navDown 0.4s forwards;}
+/*.navbar.navDown{position: fixed;z-index: 2;opacity:1;-webkit-animation: navDown 0.4s forwards;animation: navDown 0.4s forwards;}
 .navbar.navUp{position: fixed;z-index: 2;opacity:1;-webkit-animation: navUp 0.4s forwards;animation: navUp 0.4s forwards;}
+*/
+
 .navbar-header{padding:11px 25px;min-height:90px;background:#212121;}
 .navbar-brand{text-indent:-999px;}
 .navbar-default .navbar-brand{background:url(../images/css-spd.png) 0 0 no-repeat;width:205px;height:68px;}
@@ -55,12 +57,20 @@ a:hover{text-decoration:none;}
 
 
 @keyframes navDown{
-	0%{top:-90px;}
-	100%{top:0;}
+	0%{margin-top:-90px;}
+	100%{margin-top:0;}
+}
+@-webkit-keyframes navDown{
+	0%{margin-top:-90px;}
+	100%{margin-top:0;}
+}
+@-webkit-keyframes navUp{
+	0%{margin-top:0;}
+	100%{margin-top:-90px;}
 }
 @keyframes navUp{
-	0%{top:0;}
-	100%{top:-90px;}
+	0%{margin-top:0;}
+	100%{margin-top:-90px;}
 }
 
 

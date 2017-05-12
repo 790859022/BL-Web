@@ -146,7 +146,7 @@ transition:all 0.6s;
 	50%{margin-left:-20px;}
 	100%{margin-left:230px;}
 }
-
+.partner{height: 580px;overflow: hidden;}
 .partner .swiper-container{padding:100px 80px;margin:0 -20px;}
 .partner .swiper-slide a{display:block;margin:30px 0;}
 .partner .swiper-slide img{display:block;}

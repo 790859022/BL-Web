@@ -1,5 +1,5 @@
 var commonJs = {
-    dom:function(){
+    dom: function() {
         var _this = this;
         _this.nav = $('.navbar');
         _this.footer = $('.footer');
@@ -64,31 +64,75 @@ var commonJs = {
         function _navScroll() {
             var scrollTop = $(window).scrollTop();
             var navH = _this.nav.height();
-            if (scrollTop > navH) {
-                _this.nav.css({
-                    position: 'fixed',
-                    zIndex: 2,
-                    top: '-90px',
-
-                })
-            } else {
-                _this.nav.css({
-                    position: 'absolute',
-                    zIndex: 2,
-                    top: '0'
-                })
-            }
+            // console.log(scrollTop + "=" + _this.footer.position().top);
+            scrollTop >= _this.footer.position().top && _this.nav.css({
+                webkitTransitionProperty: 'top',
+                transitionProperty: 'top',
+                WebkitTransitionDuration: '.3s',
+                transitionDuration: '.3s',
+                transitionTimingFunction:'linear',
+                position: 'fixed',
+                top: '0'
+            })
         }
         _navScroll();
         $(document).bind('mousewheel', function(event, delta, deltaX, deltaY) {
             var scrollTop = $(window).scrollTop();
             var navH = _this.nav.height();
-            _navScroll();
+            // _navScroll();
+            if (deltaX) return;
 
-            if (delta > 0) {
-                _this.nav.removeClass('navUp').addClass('navDown');
+            if (scrollTop > navH) {
+                if (delta > 0) { //向上
+                    _this.nav.css({
+                        webkitTransitionProperty: 'top',
+                        transitionProperty: 'top',
+                        webkitTransitionDuration: '.3s',
+                        transitionDuration: '.3s',
+                        transitionTimingFunction:'linear',
+                        position: 'fixed',
+                        top: '0',
+                    })
+                } else {
+                    _this.nav.css({
+                        webkitTransitionProperty: 'top',
+                        transitionProperty: 'top',
+                        webkitTransitionDuration: '0',
+                        transitionDuration: '0',
+                        transitionTimingFunction:'linear',
+                        position: 'fixed',
+                        top: '-90px',
+                    })
+
+                    scrollTop >= _this.footer.position().top && _this.nav.css({
+                        webkitTransitionProperty: 'top',
+                        transitionProperty: 'top',
+                        webkitTransitionDuration: '.3s',
+                        transitionDuration: '.3s',
+                        transitionTimingFunction:'linear',
+                        position: 'fixed',
+                        top: '0'
+                    })
+                }
             } else {
-                !(scrollTop >= _this.footer.position().top) && _this.nav.removeClass('navDown').addClass('navUp');
+                _this.nav.css({
+                    webkitTransitionProperty: 'top',
+                    transitionProperty: 'top',
+                    webkitTransitionDuration: '0s',
+                    transitionDuration: '0s'
+
+                })
+
+                scrollTop <= 0 && _this.nav.css({
+                    webkitTransitionProperty: 'top',
+                    transitionProperty: 'top',
+                    webkitTransitionDuration: '0',
+                    transitionDuration: '0',
+                    transitionTimingFunction:'linear',
+                    position: 'absolute',
+                    top: '0',
+                })
+
             }
         });
     },
@@ -116,13 +160,13 @@ var commonJs = {
             }
         });
     },
-    bind:function(){
+    bind: function() {
         var _this = this;
         _this.footerPos();
         _this.navScroll();
 
     },
-    init:function(){
+    init: function() {
         var _this = this;
         _this.dom();
         _this.bind();
