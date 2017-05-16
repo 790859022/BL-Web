@@ -5,7 +5,7 @@
 	<title>Document</title>
 	<style>
 		*{padding: 0;margin: 0;}
-		.rotate{width: 800px;height: 600px;margin: 50px auto;position: relative;overflow: hidden;}
+		.rotate{width: 1280px;height: 890px;margin: 50px auto;position: relative;overflow: hidden;}
 		.rotate .left{position: absolute;z-index:1;left: -100%;right: 50%;top: -100%;bottom: -100%;transform-origin: center right;}
 		.rotate .right{position: absolute;z-index:2;right: -100%;left: 50%;top:-100%;bottom: -100%;transform-origin: center left;}
 		.rotate .r-item{position: absolute;top: 0;right: 0;bottom: 0;left: 0;width: 100%;height: 100%;visibility:hidden;}
@@ -37,10 +37,36 @@
 		.rotate .r-item-8 .r-item-r{background:url(images/r-08.jpg) center center no-repeat;}
 		.rotate .r-item-8,
 		.rotate .r-item-8 .r-item-l{background: #ff6233;}
+
+		.rotate .circle{position: absolute;left: 50%;top:50%;margin:-275px 0 0 -275px;z-index: 5;width: 545px;height: 545px; }
+		.rotate .circle .bg{position: absolute;z-index: 1;top: 0;right: 0;bottom: 0;left: 0;background:url(images/r-circle.png) center center no-repeat;}
+		.rotate .circle .icon{position: absolute;z-index: 2;top: 50%;left: 50%;width: 14px;height: 14px;border-radius: 100%;border: 1px solid #fff;-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;-webkit-transition: all .3s;
+		-o-transition: all .3s;
+		transition: all .3s;}
+		.rotate .circle .icon.active{background: #bc8e79;border-color: #bc8e79;}
+		.rotate .circle .icon-1{margin: -185px 0 0 189px;}
+		.rotate .circle .icon-2{margin: -7px 0 0 257px;}
+		.rotate .circle .icon-3{margin: 175px 0 0 185px;}
+		.rotate .circle .icon-4{margin: 257px 0 0 -5px;}
+		.rotate .circle .icon-5{margin: 183px 0 0 -190px;}
+		.rotate .circle .icon-6{margin: -7px 0 0 -272px;}
+		.rotate .circle .icon-7{margin: -190px 0 0 -198px;}
+		.rotate .circle .icon-8{margin: -272px 0 0 -5px;}
 	</style>
 </head>
 <body>
 	<div class="rotate">
+		<div class="circle">
+			<i class="icon icon-1"></i>
+			<i class="icon icon-2"></i>
+			<i class="icon icon-3"></i>
+			<i class="icon icon-4"></i>
+			<i class="icon icon-5"></i>
+			<i class="icon icon-6"></i>
+			<i class="icon icon-7"></i>
+			<i class="icon icon-8"></i>
+			<div class="bg"></div>
+		</div>
 		<div class="left"></div>
 		<div class="right"></div>
 		<div class="r-item r-item-1">
@@ -79,6 +105,179 @@
 		<button>start</button>
 	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 	<script>
+
+		var rotateBanner = {
+			dom:function(){
+				var _this = this;
+				_this.container = $('.rotate');
+				_this.leftCover = _this.container.find('.left');
+				_this.rightCover = _this.container.find('.right');
+				_this.circle = _this.container.find('.circle');
+				_this.circleBg = _this.circle.find('.bg');
+				_this.panels = _this.container.find('.r-item');
+				_this.timer = null;
+				_this.index = 0;
+			},
+			circleRotate:function(){
+				var _this = this;
+				var index = _this.index + 1;
+				if($rotate.hasClass('ing')) return;
+				console.log(index);
+				var $current = _this.container.find('.r-item-' + index);
+				index = index == len ? 0 : index;
+				var $next = _this.container.find('.r-item-' + (index + 1));
+				var _currentBg = $current.css('backgroundColor');
+				var _nextBg = $next.css('backgroundColor');
+				var _timer = null;
+
+				$rotate.addClass('ing');
+				if(index%2){
+					$current.find('.r-item-r').css({
+						zIndex:3
+					})
+					$left.css({
+						transitionProperty:'transform',
+						transitionDuration:'.5s',
+						transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+						transform:'rotate(-180deg)'
+					})
+
+					$right.css({
+						background:_nextBg,
+						transitionProperty:'transform',
+						transitionDuration:'.5s',
+						transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+						transform:'rotate(-180deg)'
+					}).bind('transitionend',function(){
+
+						$current.css({
+							visibility:'hidden'
+						})
+						$next.css({
+							visibility:'visible'
+						})
+						$left.css({
+							background:_currentBg,
+							transitionProperty:'transform',
+							transitionDuration:'.5s',
+							transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
+							transform:'rotate(-360deg)'
+						}).bind('transitionend',function(){
+
+							_timer = setTimeout(function(){
+								$left.removeAttr('style').unbind('transitionend');
+								$right.removeAttr('style').unbind('transitionend');
+								$current.find('.r-item-r').removeAttr('style');
+								$rotate.removeClass('ing');
+								clearTimeout(_timer);
+								_timer = null;
+								index++;
+							},500);
+						})
+					})
+
+					
+				}else{
+					$current.find('.r-item-l').css({
+						zIndex:3
+					})
+					$left.css({
+						background:_nextBg,
+						transitionProperty:'transform',
+						transitionDuration:'.5s',
+						transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+						transform:'rotate(-180deg)',
+						zIndex:2,
+					})
+
+					$right.css({
+						transitionProperty:'transform',
+						transitionDuration:'.5s',
+						transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+						transform:'rotate(-180deg)',
+						zIndex:1
+					}).bind('transitionend',function(){
+						$right.css({
+							background:_currentBg,
+							transitionProperty:'transform',
+							transitionDuration:'.5s',
+							transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
+							transform:'rotate(-360deg)',
+							zIndex:1
+						}).bind('transitionend',function(){
+
+							setTimeout(function(){
+								$left.removeAttr('style').unbind('transitionend');
+								$right.removeAttr('style').unbind('transitionend');
+								$current.find('.r-item-l').removeAttr('style');
+								$rotate.removeClass('ing');
+								clearTimeout(_timer);
+								_timer = null;
+
+								index++;
+							},0);
+						})
+						$current.css({
+							visibility:'hidden'
+						})
+						$next.css({
+							visibility:'visible'
+						})
+					})
+				}
+			},
+			start:function(){
+				var _this = this;
+				var _rotate = _this.rotate || 0;
+				var _index = _this.index;
+				var _len = _this.panels.length;
+				var _between = parseInt(360/_len);
+				_this.timer = setInterval(function(){
+					_rotate++;
+					_this.circleBg.css({
+						transform:'rotate(' + _rotate + 'deg)'
+					})
+					_index = Math.floor(_rotate/_between);
+					// console.log(_index);
+					var _color = _this.container.find('.r-item-' + (_index + 1)).css('backgroundColor');
+					// _this.circleRotate();
+					_rotate%_between == 0 && _this.circleRotate();
+					_this.circle.find('.icon-'+(_index + 1)).css({
+						backgroundColor:_color
+					}).siblings('.icon').css({
+						backgroundColor:'transparent'
+					});
+					_index >= _len && (_rotate = 0);
+					_this.index = _index;
+					_this.rotate = _rotate;
+
+				},50)
+
+			},
+			stop:function(){
+				var _this = this;
+				clearInterval(_this.timer);
+				_this.timer=null;
+			},
+			bind:function(){
+				var _this = this;
+
+				_this.container.hover(function(){
+					_this.stop();
+				},function(){
+					_this.start();
+				});
+			},
+			init:function(){
+				var _this = this;
+				_this.dom();
+				_this.bind();
+				_this.start();
+			}
+		}
+		rotateBanner.init();
+
+
 		var $rotate = $('.rotate');
 		var $left = $rotate.find('.left');
 		var $right = $rotate.find('.right');
@@ -97,7 +296,6 @@
 			$rotate.addClass('ing');
 			if(index%2){
 				$current.find('.r-item-r').css({
-
 					zIndex:3
 				})
 				$left.css({
