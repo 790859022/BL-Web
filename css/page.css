@@ -170,6 +170,16 @@ transition: all 0.5s;position: absolute;left: 50%;top: 50%;margin: -180px 0 0 -1
 }
 
 /* =======================  about  =======================*/
+
+
+/* =======================  news  =======================*/
+.news-list-tab{}
+.news-list-tab li{width: 33.33%;float: left;font-size: 22px;line-height: 120px;text-align: center;}
+.news-list-tab li a{color: #000;}
+/* =======================  news  =======================*/
+
+
+
 @media screen and (max-width:1024px){
 	.about-2{overflow: hidden;}
 	.partner .swiper-container{padding: 70px 0;}

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding: 0;margin: 0;}
+		.rotate{width: 800px;height: 600px;margin: 50px auto;position: relative;overflow: hidden;}
+		.rotate .left{position: absolute;z-index:1;left: -100%;right: 50%;top: -100%;bottom: -100%;transform-origin: center right;}
+		.rotate .right{position: absolute;z-index:2;right: -100%;left: 50%;top:-100%;bottom: -100%;transform-origin: center left;}
+		.rotate .r-item{position: absolute;top: 0;right: 0;bottom: 0;left: 0;width: 100%;height: 100%;visibility:hidden;}
+		.rotate .r-item-l{position: relative;float: left;width: 50%;height: 100%;}
+		.rotate .r-item-r{position: relative;float: right;width: 50%;height: 100%;}
+	
+		.rotate .r-item-1{visibility: visible}
+		.rotate .r-item-1 .r-item-l{background:url(images/r-01.jpg) center center no-repeat;}
+		.rotate .r-item-1,
+		.rotate .r-item-1 .r-item-r{background: #bc8e79;}
+		.rotate .r-item-2 .r-item-r{background:url(images/r-02.jpg) center center no-repeat;}
+		.rotate .r-item-2,
+		.rotate .r-item-2 .r-item-l{background: #010101;}
+		.rotate .r-item-3 .r-item-l{background:url(images/r-03.jpg) center center no-repeat;}
+		.rotate .r-item-3,
+		.rotate .r-item-3 .r-item-r{background: #009fec;}
+		.rotate .r-item-4 .r-item-r{background:url(images/r-04.jpg) center center no-repeat;}
+		.rotate .r-item-4,
+		.rotate .r-item-4 .r-item-l{background: #576379;}
+		.rotate .r-item-5 .r-item-l{background:url(images/r-05.jpg) center center no-repeat;}
+		.rotate .r-item-5,
+		.rotate .r-item-5 .r-item-r{background: #9dd2ab;}
+		.rotate .r-item-6 .r-item-r{background:url(images/r-06.jpg) center center no-repeat;}
+		.rotate .r-item-6,
+		.rotate .r-item-6 .r-item-l{background: #27273f;}
+		.rotate .r-item-7 .r-item-l{background:url(images/r-07.jpg) center center no-repeat;}
+		.rotate .r-item-7,
+		.rotate .r-item-7 .r-item-r{background: #2f4628;}
+		.rotate .r-item-8 .r-item-r{background:url(images/r-08.jpg) center center no-repeat;}
+		.rotate .r-item-8,
+		.rotate .r-item-8 .r-item-l{background: #ff6233;}
+	</style>
+</head>
+<body>
+	<div class="rotate">
+		<div class="left"></div>
+		<div class="right"></div>
+		<div class="r-item r-item-1">
+			<div class="r-item-l"></div>
+			<div class="r-item-r"></div>
+		</div>
+		<div class="r-item r-item-2">
+			<div class="r-item-l"></div>
+			<div class="r-item-r"></div>
+		</div>
+		<div class="r-item r-item-3">
+			<div class="r-item-l"></div>
+			<div class="r-item-r"></div>
+		</div>
+		<div class="r-item r-item-4">
+			<div class="r-item-l"></div>
+			<div class="r-item-r"></div>
+		</div>
+		<div class="r-item r-item-5">
+			<div class="r-item-l"></div>
+			<div class="r-item-r"></div>
+		</div>
+		<div class="r-item r-item-6">
+			<div class="r-item-l"></div>
+			<div class="r-item-r"></div>
+		</div>
+		<div class="r-item r-item-7">
+			<div class="r-item-l"></div>
+			<div class="r-item-r"></div>
+		</div>
+		<div class="r-item r-item-8">
+			<div class="r-item-l"></div>
+			<div class="r-item-r"></div>
+		</div>
+	</div>
+		<button>start</button>
+	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+	<script>
+		var $rotate = $('.rotate');
+		var $left = $rotate.find('.left');
+		var $right = $rotate.find('.right');
+		var len = $rotate.find('.r-item').length;
+		var index = 1;
+		$('button').bind('click',function(){
+			if($rotate.hasClass('ing')) return;
+			var $current = $('.rotate .r-item-' + index);
+			index = index == len ? 0 : index;
+			var $next = $('.rotate .r-item-' + (index + 1));
+			console.log(index);
+			var _currentBg = $current.css('backgroundColor');
+			var _nextBg = $next.css('backgroundColor');
+			var _timer = null;
+
+			$rotate.addClass('ing');
+			if(index%2){
+				$current.find('.r-item-r').css({
+
+					zIndex:3
+				})
+				$left.css({
+					transitionProperty:'transform',
+					transitionDuration:'.5s',
+					transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+					transform:'rotate(-180deg)'
+				})
+
+				$right.css({
+					background:_nextBg,
+					transitionProperty:'transform',
+					transitionDuration:'.5s',
+					transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+					transform:'rotate(-180deg)'
+				}).bind('transitionend',function(){
+
+					$current.css({
+						visibility:'hidden'
+					})
+					$next.css({
+						visibility:'visible'
+					})
+					$left.css({
+						background:_currentBg,
+						transitionProperty:'transform',
+						transitionDuration:'.5s',
+						transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
+						transform:'rotate(-360deg)'
+					}).bind('transitionend',function(){
+
+						_timer = setTimeout(function(){
+							$left.removeAttr('style').unbind('transitionend');
+							$right.removeAttr('style').unbind('transitionend');
+							$current.find('.r-item-r').removeAttr('style');
+							$rotate.removeClass('ing');
+							clearTimeout(_timer);
+							_timer = null;
+							index++;
+						},500);
+					})
+				})
+
+				
+			}else{
+				$current.find('.r-item-l').css({
+					zIndex:3
+				})
+				$left.css({
+					background:_nextBg,
+					transitionProperty:'transform',
+					transitionDuration:'.5s',
+					transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+					transform:'rotate(-180deg)',
+					zIndex:2,
+				})
+
+				$right.css({
+					transitionProperty:'transform',
+					transitionDuration:'.5s',
+					transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+					transform:'rotate(-180deg)',
+					zIndex:1
+				}).bind('transitionend',function(){
+					$right.css({
+						background:_currentBg,
+						transitionProperty:'transform',
+						transitionDuration:'.5s',
+						transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
+						transform:'rotate(-360deg)',
+						zIndex:1
+					}).bind('transitionend',function(){
+
+						setTimeout(function(){
+							$left.removeAttr('style').unbind('transitionend');
+							$right.removeAttr('style').unbind('transitionend');
+							$current.find('.r-item-l').removeAttr('style');
+							$rotate.removeClass('ing');
+							clearTimeout(_timer);
+							_timer = null;
+
+							index++;
+						},0);
+					})
+					$current.css({
+						visibility:'hidden'
+					})
+					$next.css({
+						visibility:'visible'
+					})
+
+				})
+
+
+
+			}
+
+
+
+		});
+	</script>
+</body>
+</html>
