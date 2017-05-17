@@ -13,30 +13,30 @@
 		.rotate .r-item-r{position: relative;float: right;width: 50%;height: 100%;}
 	
 		.rotate .r-item-1{visibility: visible}
-		.rotate .r-item-1 .r-item-l{background:url(images/r-01.jpg) center center no-repeat;}
+		.rotate .r-item-1 .r-item-r{background:url(images/r-01.jpg) center center no-repeat;}
 		.rotate .r-item-1,
-		.rotate .r-item-1 .r-item-r{background: #bc8e79;}
-		.rotate .r-item-2 .r-item-r{background:url(images/r-02.jpg) center center no-repeat;}
+		.rotate .r-item-1 .r-item-l{background: #bc8e79;}
+		.rotate .r-item-2 .r-item-l{background:url(images/r-02.jpg) center center no-repeat;}
 		.rotate .r-item-2,
-		.rotate .r-item-2 .r-item-l{background: #010101;}
-		.rotate .r-item-3 .r-item-l{background:url(images/r-03.jpg) center center no-repeat;}
+		.rotate .r-item-2 .r-item-r{background: #010101;}
+		.rotate .r-item-3 .r-item-r{background:url(images/r-03.jpg) center center no-repeat;}
 		.rotate .r-item-3,
-		.rotate .r-item-3 .r-item-r{background: #009fec;}
-		.rotate .r-item-4 .r-item-r{background:url(images/r-04.jpg) center center no-repeat;}
+		.rotate .r-item-3 .r-item-l{background: #009fec;}
+		.rotate .r-item-4 .r-item-l{background:url(images/r-04.jpg) center center no-repeat;}
 		.rotate .r-item-4,
-		.rotate .r-item-4 .r-item-l{background: #576379;}
-		.rotate .r-item-5 .r-item-l{background:url(images/r-05.jpg) center center no-repeat;}
+		.rotate .r-item-4 .r-item-r{background: #576379;}
+		.rotate .r-item-5 .r-item-r{background:url(images/r-05.jpg) center center no-repeat;}
 		.rotate .r-item-5,
-		.rotate .r-item-5 .r-item-r{background: #9dd2ab;}
-		.rotate .r-item-6 .r-item-r{background:url(images/r-06.jpg) center center no-repeat;}
+		.rotate .r-item-5 .r-item-l{background: #9dd2ab;}
+		.rotate .r-item-6 .r-item-l{background:url(images/r-06.jpg) center center no-repeat;}
 		.rotate .r-item-6,
-		.rotate .r-item-6 .r-item-l{background: #27273f;}
-		.rotate .r-item-7 .r-item-l{background:url(images/r-07.jpg) center center no-repeat;}
+		.rotate .r-item-6 .r-item-r{background: #27273f;}
+		.rotate .r-item-7 .r-item-r{background:url(images/r-07.jpg) center center no-repeat;}
 		.rotate .r-item-7,
-		.rotate .r-item-7 .r-item-r{background: #2f4628;}
-		.rotate .r-item-8 .r-item-r{background:url(images/r-08.jpg) center center no-repeat;}
+		.rotate .r-item-7 .r-item-l{background: #2f4628;}
+		.rotate .r-item-8 .r-item-l{background:url(images/r-08.jpg) center center no-repeat;}
 		.rotate .r-item-8,
-		.rotate .r-item-8 .r-item-l{background: #ff6233;}
+		.rotate .r-item-8 .r-item-r{background: #ff6233;}
 
 		.rotate .circle{position: absolute;left: 50%;top:50%;margin:-275px 0 0 -275px;z-index: 5;width: 545px;height: 545px; }
 		.rotate .circle .bg{position: absolute;z-index: 1;top: 0;right: 0;bottom: 0;left: 0;background:url(images/r-circle.png) center center no-repeat;}
@@ -131,25 +131,71 @@
 				var _timer = null;
 
 				$rotate.addClass('ing');
+
 				if(index%2){
-					$current.find('.r-item-r').css({
+					$current.find('.r-item-l').css({
 						zIndex:3
 					})
-					$left.css({
+					$right.css({
 						transitionProperty:'transform',
 						transitionDuration:'.5s',
 						transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
-						transform:'rotate(-180deg)'
+						transform:'rotate(180deg)',
+						zIndex:1
 					})
+					$left.css({
+						background:_nextBg,
+						transitionProperty:'transform',
+						transitionDuration:'.5s',
+						transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+						transform:'rotate(180deg)',
+						zIndex:2
+					}).bind('transitionend',function(){
+						$current.css({
+							visibility:'hidden'
+						})
+						$next.css({
+							visibility:'visible'
+						})
+						$right.css({
+							background:_currentBg,
+							transitionProperty:'transform',
+							transitionDuration:'.5s',
+							transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
+							transform:'rotate(360deg)'
+						})
+						_timer = setTimeout(function(){
+							$left.removeAttr('style').unbind('transitionend');
+							$right.removeAttr('style').unbind('transitionend');
+							$current.find('.r-item-l').removeAttr('style');
+							$rotate.removeClass('ing');
+							clearTimeout(_timer);
+							_timer = null;
+							index++;
+						},500);
 
+					})
+					
+				}else{
+					$current.find('.r-item-r').css({
+						zIndex:3
+					})
 					$right.css({
 						background:_nextBg,
 						transitionProperty:'transform',
 						transitionDuration:'.5s',
 						transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
-						transform:'rotate(-180deg)'
-					}).bind('transitionend',function(){
+						transform:'rotate(180deg)',
+						zIndex:2,
+					})
 
+					$left.css({
+						transitionProperty:'transform',
+						transitionDuration:'.5s',
+						transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+						transform:'rotate(180deg)',
+						zIndex:1
+					}).bind('transitionend',function(){
 						$current.css({
 							visibility:'hidden'
 						})
@@ -161,75 +207,30 @@
 							transitionProperty:'transform',
 							transitionDuration:'.5s',
 							transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
-							transform:'rotate(-360deg)'
-						}).bind('transitionend',function(){
-
-							_timer = setTimeout(function(){
-								$left.removeAttr('style').unbind('transitionend');
-								$right.removeAttr('style').unbind('transitionend');
-								$current.find('.r-item-r').removeAttr('style');
-								$rotate.removeClass('ing');
-								clearTimeout(_timer);
-								_timer = null;
-								index++;
-							},500);
-						})
-					})
-
-					
-				}else{
-					$current.find('.r-item-l').css({
-						zIndex:3
-					})
-					$left.css({
-						background:_nextBg,
-						transitionProperty:'transform',
-						transitionDuration:'.5s',
-						transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
-						transform:'rotate(-180deg)',
-						zIndex:2,
-					})
-
-					$right.css({
-						transitionProperty:'transform',
-						transitionDuration:'.5s',
-						transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
-						transform:'rotate(-180deg)',
-						zIndex:1
-					}).bind('transitionend',function(){
-						$right.css({
-							background:_currentBg,
-							transitionProperty:'transform',
-							transitionDuration:'.5s',
-							transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
-							transform:'rotate(-360deg)',
+							transform:'rotate(360deg)',
 							zIndex:1
-						}).bind('transitionend',function(){
+						})
+						setTimeout(function(){
+							$left.removeAttr('style').unbind('transitionend');
+							$right.removeAttr('style').unbind('transitionend');
+							$current.find('.r-item-l').removeAttr('style');
+							$rotate.removeClass('ing');
+							clearTimeout(_timer);
+							_timer = null;
 
-							setTimeout(function(){
-								$left.removeAttr('style').unbind('transitionend');
-								$right.removeAttr('style').unbind('transitionend');
-								$current.find('.r-item-l').removeAttr('style');
-								$rotate.removeClass('ing');
-								clearTimeout(_timer);
-								_timer = null;
-
-								index++;
-							},0);
-						})
-						$current.css({
-							visibility:'hidden'
-						})
-						$next.css({
-							visibility:'visible'
-						})
+							index++;
+						},500);
 					})
+
 				}
+
+
+
 			},
 			start:function(){
 				var _this = this;
 				var _rotate = _this.rotate || 0;
-				var _index = _this.index;
+				var _index = _this.index || 0;
 				var _len = _this.panels.length;
 				var _between = parseInt(360/_len);
 				_this.timer = setInterval(function(){
@@ -295,24 +296,69 @@
 
 			$rotate.addClass('ing');
 			if(index%2){
-				$current.find('.r-item-r').css({
+				$current.find('.r-item-l').css({
 					zIndex:3
 				})
-				$left.css({
+				$right.css({
 					transitionProperty:'transform',
 					transitionDuration:'.5s',
 					transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
-					transform:'rotate(-180deg)'
+					transform:'rotate(180deg)',
+					zIndex:1
 				})
+				$left.css({
+					background:_nextBg,
+					transitionProperty:'transform',
+					transitionDuration:'.5s',
+					transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+					transform:'rotate(180deg)',
+					zIndex:2
+				}).bind('transitionend',function(){
+					$current.css({
+						visibility:'hidden'
+					})
+					$next.css({
+						visibility:'visible'
+					})
+					$right.css({
+						background:_currentBg,
+						transitionProperty:'transform',
+						transitionDuration:'.5s',
+						transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
+						transform:'rotate(360deg)'
+					})
+					_timer = setTimeout(function(){
+						$left.removeAttr('style').unbind('transitionend');
+						$right.removeAttr('style').unbind('transitionend');
+						$current.find('.r-item-l').removeAttr('style');
+						$rotate.removeClass('ing');
+						clearTimeout(_timer);
+						_timer = null;
+						index++;
+					},500);
 
+				})
+				
+			}else{
+				$current.find('.r-item-r').css({
+					zIndex:3
+				})
 				$right.css({
 					background:_nextBg,
 					transitionProperty:'transform',
 					transitionDuration:'.5s',
 					transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
-					transform:'rotate(-180deg)'
-				}).bind('transitionend',function(){
+					transform:'rotate(180deg)',
+					zIndex:2,
+				})
 
+				$left.css({
+					transitionProperty:'transform',
+					transitionDuration:'.5s',
+					transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+					transform:'rotate(180deg)',
+					zIndex:1
+				}).bind('transitionend',function(){
 					$current.css({
 						visibility:'hidden'
 					})
@@ -324,72 +370,20 @@
 						transitionProperty:'transform',
 						transitionDuration:'.5s',
 						transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
-						transform:'rotate(-360deg)'
-					}).bind('transitionend',function(){
-
-						_timer = setTimeout(function(){
-							$left.removeAttr('style').unbind('transitionend');
-							$right.removeAttr('style').unbind('transitionend');
-							$current.find('.r-item-r').removeAttr('style');
-							$rotate.removeClass('ing');
-							clearTimeout(_timer);
-							_timer = null;
-							index++;
-						},500);
-					})
-				})
-
-				
-			}else{
-				$current.find('.r-item-l').css({
-					zIndex:3
-				})
-				$left.css({
-					background:_nextBg,
-					transitionProperty:'transform',
-					transitionDuration:'.5s',
-					transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
-					transform:'rotate(-180deg)',
-					zIndex:2,
-				})
-
-				$right.css({
-					transitionProperty:'transform',
-					transitionDuration:'.5s',
-					transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
-					transform:'rotate(-180deg)',
-					zIndex:1
-				}).bind('transitionend',function(){
-					$right.css({
-						background:_currentBg,
-						transitionProperty:'transform',
-						transitionDuration:'.5s',
-						transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
-						transform:'rotate(-360deg)',
+						transform:'rotate(360deg)',
 						zIndex:1
-					}).bind('transitionend',function(){
-
-						setTimeout(function(){
-							$left.removeAttr('style').unbind('transitionend');
-							$right.removeAttr('style').unbind('transitionend');
-							$current.find('.r-item-l').removeAttr('style');
-							$rotate.removeClass('ing');
-							clearTimeout(_timer);
-							_timer = null;
-
-							index++;
-						},0);
 					})
-					$current.css({
-						visibility:'hidden'
-					})
-					$next.css({
-						visibility:'visible'
-					})
+					setTimeout(function(){
+						$left.removeAttr('style').unbind('transitionend');
+						$right.removeAttr('style').unbind('transitionend');
+						$current.find('.r-item-l').removeAttr('style');
+						$rotate.removeClass('ing');
+						clearTimeout(_timer);
+						_timer = null;
 
+						index++;
+					},500);
 				})
-
-
 
 			}
 
