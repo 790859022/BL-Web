@@ -40,9 +40,13 @@
 
 		.rotate .circle{position: absolute;left: 50%;top:50%;margin:-275px 0 0 -275px;z-index: 5;width: 545px;height: 545px; }
 		.rotate .circle .bg{position: absolute;z-index: 1;top: 0;right: 0;bottom: 0;left: 0;background:url(images/r-circle.png) center center no-repeat;}
-		.rotate .circle .icon{position: absolute;z-index: 2;top: 50%;left: 50%;width: 14px;height: 14px;border-radius: 100%;border: 1px solid #fff;-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;-webkit-transition: all .3s;
+		.rotate .big{color: #fff;font-size: 90px;width: 5em;height: 1em;position: absolute;left: 50%;top: 50%;text-align: center;margin: -0.5em 0 0 -2.5em;}
+		.rotate .circle .icon,
+		.rotate .circle .name{position: absolute;z-index: 2;top: 50%;left: 50%;width: 14px;height: 14px;border-radius: 100%;border: 1px solid #fff;-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;-webkit-transition: all .3s;
 		-o-transition: all .3s;
 		transition: all .3s;}
+		.rotate .circle .name{width: auto;opacity: 0.5; filter: alpha(opacity=50);white-space: nowrap;color: #fff;font-weight: bold;border: none;font-size: 16px;}
+		.rotate .circle .name.active{opacity: 1; filter: alpha(opacity=100);}
 		.rotate .circle .icon.active{background: #bc8e79;border-color: #bc8e79;}
 		.rotate .circle .icon-1{margin: -185px 0 0 189px;}
 		.rotate .circle .icon-2{margin: -7px 0 0 257px;}
@@ -52,11 +56,28 @@
 		.rotate .circle .icon-6{margin: -7px 0 0 -272px;}
 		.rotate .circle .icon-7{margin: -190px 0 0 -198px;}
 		.rotate .circle .icon-8{margin: -272px 0 0 -5px;}
+		.rotate .circle .name-1{margin: -200px 0 0 210px;}
+		.rotate .circle .name-2{margin: -7px 0 0 280px;}
+		.rotate .circle .name-3{margin: 180px 0 0 210px;}
+		.rotate .circle .name-4{margin: 280px 0 0 -30px;}
+		.rotate .circle .name-5{margin: 190px 0 0 -260px;}
+		.rotate .circle .name-6{margin: -7px 0 0 -350px;}
+		.rotate .circle .name-7{margin: -210px 0 0 -270px;}
+		.rotate .circle .name-8{margin: -300px 0 0 -30px;}
 	</style>
 </head>
 <body>
 	<div class="rotate">
 		<div class="circle">
+			
+			<span class="name name-1">咨询报价</span>
+			<span class="name name-2">合作确定</span>
+			<span class="name name-3">访谈调研</span>
+			<span class="name name-4">创意手稿</span>
+			<span class="name name-5">方案设计</span>
+			<span class="name name-6">方案论证</span>
+			<span class="name name-7">方案实施</span>
+			<span class="name name-8">项目验收</span>
 			<i class="icon icon-1"></i>
 			<i class="icon icon-2"></i>
 			<i class="icon icon-3"></i>
@@ -65,6 +86,7 @@
 			<i class="icon icon-6"></i>
 			<i class="icon icon-7"></i>
 			<i class="icon icon-8"></i>
+			<span class="big">咨询&nbsp;&nbsp;报价</span>
 			<div class="bg"></div>
 		</div>
 		<div class="left"></div>
@@ -114,6 +136,7 @@
 				_this.rightCover = _this.container.find('.right');
 				_this.circle = _this.container.find('.circle');
 				_this.circleBg = _this.circle.find('.bg');
+				_this.bigText = _this.circle.find('.big');
 				_this.panels = _this.container.find('.r-item');
 				_this.timer = null;
 				_this.index = 0;
@@ -248,6 +271,10 @@
 					}).siblings('.icon').css({
 						backgroundColor:'transparent'
 					});
+					_this.currentName = _this.circle.find('.name-'+(_index + 1));
+					_this.currentName.addClass('active').siblings('.name').removeClass('active');
+					_this.bigText.text(_this.currentName.text());
+
 					_index >= _len && (_rotate = 0);
 					_this.index = _index;
 					_this.rotate = _rotate;
