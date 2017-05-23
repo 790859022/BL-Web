@@ -40,7 +40,7 @@
 
 		.rotate .circle{position: absolute;left: 50%;top:50%;margin:-275px 0 0 -275px;z-index: 5;width: 545px;height: 545px; }
 		.rotate .circle .bg{position: absolute;z-index: 1;top: 0;right: 0;bottom: 0;left: 0;background:url(images/r-circle.png) center center no-repeat;}
-		.rotate .big{color: #fff;font-size: 90px;width: 5em;height: 1em;position: absolute;left: 50%;top: 50%;text-align: center;margin: -0.5em 0 0 -2.5em;}
+		.rotate .big{color: #fff;font-size: 90px;width: 5em;height: 1em;line-height: 1em;position: absolute;left: 50%;top: 50%;text-align: center;margin: -0.5em 0 0 -2.5em;}
 		.rotate .circle .icon,
 		.rotate .circle .name{position: absolute;z-index: 2;top: 50%;left: 50%;width: 14px;height: 14px;border-radius: 100%;border: 1px solid #fff;-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;-webkit-transition: all .3s;
 		-o-transition: all .3s;
@@ -145,7 +145,7 @@
 				var _this = this;
 				var index = _this.index + 1;
 				if($rotate.hasClass('ing')) return;
-				console.log(index);
+				// console.log(index);
 				var $current = _this.container.find('.r-item-' + index);
 				index = index == len ? 0 : index;
 				var $next = _this.container.find('.r-item-' + (index + 1));
@@ -256,30 +256,55 @@
 				var _index = _this.index || 0;
 				var _len = _this.panels.length;
 				var _between = parseInt(360/_len);
-				_this.timer = setInterval(function(){
-					_rotate++;
-					_this.circleBg.css({
-						transform:'rotate(' + _rotate + 'deg)'
-					})
-					_index = Math.floor(_rotate/_between);
-					// console.log(_index);
+
+				//初始化
+				if( (_rotate == 0) && (_index == 0)){
+					change();
+				}
+				function change(){
+					_index = _index == _len ? 0 : _index;
 					var _color = _this.container.find('.r-item-' + (_index + 1)).css('backgroundColor');
-					// _this.circleRotate();
-					_rotate%_between == 0 && _this.circleRotate();
 					_this.circle.find('.icon-'+(_index + 1)).css({
 						backgroundColor:_color
 					}).siblings('.icon').css({
 						backgroundColor:'transparent'
 					});
+
 					_this.currentName = _this.circle.find('.name-'+(_index + 1));
 					_this.currentName.addClass('active').siblings('.name').removeClass('active');
-					_this.bigText.text(_this.currentName.text());
+
+					var _name = _this.currentName.text();
+					_name = _name.substr(0,2) + '&nbsp;&nbsp;' +_name.substr(2);
+					console.log(_name);
+					_this.bigText.css({
+						transitionProperty:'transform',
+						transitionDuration:'.2s',
+						transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
+						opacity:0
+					})
+
+					// _this.bigText.html(_name);
+				}
+				_this.timer = setInterval(function(){
+					console.log(_rotate);
+					_rotate++;
+					_this.circleBg.css({
+						transform:'rotate(' + _rotate + 'deg)'
+					})
+					_index = Math.floor(_rotate/_between);
+
+
+					if(_rotate%_between == 0){
+						change();
+						_this.circleRotate();
+					}
+
 
 					_index >= _len && (_rotate = 0);
 					_this.index = _index;
 					_this.rotate = _rotate;
 
-				},50)
+				},150)
 
 			},
 			stop:function(){
@@ -316,7 +341,7 @@
 			var $current = $('.rotate .r-item-' + index);
 			index = index == len ? 0 : index;
 			var $next = $('.rotate .r-item-' + (index + 1));
-			console.log(index);
+			// console.log(index);
 			var _currentBg = $current.css('backgroundColor');
 			var _nextBg = $next.css('backgroundColor');
 			var _timer = null;
