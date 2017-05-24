@@ -174,7 +174,18 @@ transition: all 0.5s;position: absolute;left: 50%;top: 50%;margin: -180px 0 0 -1
 /* =======================  news  =======================*/
 .news-list-tab{}
 .news-list-tab li{width: 33.33%;float: left;font-size: 22px;line-height: 120px;text-align: center;}
-.news-list-tab li a{color: #000;}
+.news-list-tab li a{color: #000;display: block;position: relative;}
+.news-list-tab li.active a:before{content: '';width: 6px;height: 6px;background: #000;position: absolute;left: 50%;top: 50%;margin: -3px 0 0 -3em;}
+.news-list li{margin-top: 100px;}
+.news-list li:first-child{margin-top: 0;}
+.news-list li a{color: #000;display: block;}
+.news-list li img{float: left;width: 50%;}
+.news-list li .text	{float: right;width: 50%;color: #999;padding: 50px 0 0 50px;-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
+.news-list li .text	h3{font-size: 18px;margin:0 0 10px 0;text-indent: -0.5em;-webkit-transition: all 0.5s; -o-transition: all 0.5s; transition: all 0.5s;}
+.news-list li .text	h3:hover{color: #00a0e9;}
+.news-list li .text	.date{font-size: 14px;color: #000;margin-bottom: 50px;}
+.news-list .more{-webkit-transition: all 0.5s; -o-transition: all 0.5s; transition: all 0.5s;display: block;width:160px;height:60px;line-height: 60px;margin:150px auto;text-align: center;color: #000;border-left: 1px solid #000;border-right: 1px solid #000;}
+.news-list .more:hover{color: #00a0e9;border-color: #00a0e9;}
 /* =======================  news  =======================*/
 
 
@@ -384,6 +395,18 @@ transition: all 0.5s;position: absolute;left: 50%;top: 50%;margin: -180px 0 0 -1
 	.server-rotate .rotate .circle .name-8{margin: -120px 0 0 -27px;}
 	.server-rotate .list{padding: 0 20px;}
 	.server-rotate .list li{width: 33.33%;padding: 10px 0;}
+	
+	.news-list-tab{margin: 0;background: #009fec;padding: 20px 0;}
+	.news-list-tab ul{margin: 0;}
+	.news-list-tab li{width: 100%;line-height: 60px;}
+	.news-list-tab li a{color: #fff;}
+	.news-list-tab li.active a:before{background: #fff;}
+	.news-list li{margin-top: 50px;}
+	.news-list li img,
+	.news-list li .text{float: none;width: 100%;}
+	.news-list li .text{padding: 20px;}
+	.news-list .more{margin: 50px auto 100px;}
+
 }
 
 @media screen and (max-width: 414px){
