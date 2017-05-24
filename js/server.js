@@ -207,7 +207,7 @@ var rotateBanner = {
         var _this = this;
         _this.dom();
         _this.bind();
-        // _this.start();
+        _this.start();
     }
 }
 rotateBanner.init();
