@@ -168,7 +168,6 @@ transition: all 0.5s;position: absolute;left: 50%;top: 50%;margin: -180px 0 0 -1
 	50%{margin-left:-20px;}
 	100%{margin-left:230px;}
 }
-
 /* =======================  about  =======================*/
 
 
@@ -278,7 +277,7 @@ transition: all 0.5s;position: absolute;left: 50%;top: 50%;margin: -180px 0 0 -1
 .server-rotate .list{}
 .server-rotate .list li{float: left;width: 12.5%;color: #999;}
 .server-rotate .list li span:first-child{position: relative;font-size: 12px;}
-.server-rotate .list li span:first-child:after{content: '';position: absolute;right: 0;top: 0;width: 10px;margin-top: 4px;margin-right: -22px;border-top: 1px solid #3399ff;}
+.server-rotate .list li span:first-child:after{content: '';position: absolute;left: 0;top: 0;width: 10px;margin-left: 12px;margin-top: 3px;border-top: 1px solid #3399ff;}
 .server-rotate .list li span{display: block;font-size: 16px;line-height: 1.4em;}
 /* =======================  server  =======================*/
 
@@ -293,6 +292,8 @@ transition: all 0.5s;position: absolute;left: 50%;top: 50%;margin: -180px 0 0 -1
 	.other-enter .item a{height: 400px;}
 	.other-enter .case a{-webkit-background-size: cover; background-size: cover;}
 	.other-enter .item .circle{width: 300px;height: 300px;margin: -150px 0 0 -150px;}
+
+	.server-rotate .rotate{width: 100%;}
 }
 @media screen and (max-width:768px){
 	.partner .swiper-container{padding: 30px 0;}
@@ -343,8 +344,46 @@ transition: all 0.5s;position: absolute;left: 50%;top: 50%;margin: -180px 0 0 -1
 	.about-2.show .item-2{margin-left: 2%;margin-top: -285px;-webkit-animation: null 1s forwards;animation: null 1s forwards;}
 	.about-2.show .item-3{margin-left: -42%;margin-top: 15px;-webkit-animation: null 1s forwards;animation: null 1s forwards;}
 	.about-2.show .item-4{margin-left: 2%;margin-top: 15px;-webkit-animation: null 2s forwards;animation: null 2s forwards;}
-
-
+	
+	.server-rotate{margin-bottom: 100px;}
+	.server-rotate h3{margin: 0 0 20px 0;padding: 0 20px;}
+	.server-list{margin-bottom: 50px;}
+	.server-list .item img,
+	.server-list .item .text{float: none !important;width: 100%;}
+	.server-list .item .text{padding: 30px;}
+	.server-list .item .des{padding-left: 0;}
+	.server-rotate .rotate {height: 340px;}
+	.server-rotate .rotate .circle{width: 200px;height: 200px;margin: -100px 0 0 -100px;}
+	.server-rotate .rotate .circle .bg{-webkit-background-size: 200px 200px; background-size: 200px 200px;opacity: .3;}
+	.server-rotate .rotate .big{font-size: 30px;}
+	.server-rotate .rotate .r-item-1 .r-item-r,
+	.server-rotate .rotate .r-item-2 .r-item-l,
+	.server-rotate .rotate .r-item-3 .r-item-r,
+	.server-rotate .rotate .r-item-4 .r-item-l,
+	.server-rotate .rotate .r-item-5 .r-item-r,
+	.server-rotate .rotate .r-item-6 .r-item-l,
+	.server-rotate .rotate .r-item-7 .r-item-r,
+	.server-rotate .rotate .r-item-8 .r-item-l{-webkit-background-size: cover; background-size: cover;} 
+	.server-rotate .rotate .circle .icon{width: 6px;height: 6px;}
+	.server-rotate .rotate .circle .name{font-size: 14px;}
+	.server-rotate .rotate .circle .icon-1{margin: -80px 0 0 57px;}
+	.server-rotate .rotate .circle .icon-2{margin: -7px 0 0 94px;}
+	.server-rotate .rotate .circle .icon-3{margin: 74px 0 0 57px;}
+	.server-rotate .rotate .circle .icon-4{margin: 94px 0 0 -3px;}
+	.server-rotate .rotate .circle .icon-5{margin: 76px 0 0 -60px;}
+	.server-rotate .rotate .circle .icon-6{margin: -7px 0 0 -100px;}
+	.server-rotate .rotate .circle .icon-7{margin: -73px 0 0 -70px;}
+	.server-rotate .rotate .circle .icon-8{margin: -100px 0 0 -3px;}
+	.server-rotate .rotate .circle .name-1{margin: -95px 0 0 65px;}
+	.server-rotate .rotate .circle .name-2{margin: -15px 0 0 105px;}
+	.server-rotate .rotate .circle .name-3{margin: 74px 0 0 68px;}
+	.server-rotate .rotate .circle .name-4{margin: 102px 0 0 -28px;}
+	.server-rotate .rotate .circle .name-5{margin: 80px 0 0 -120px;}
+	.server-rotate .rotate .circle .name-6{margin: -14px 0 0 -160px;}
+	.server-rotate .rotate .circle .name-7{margin: -90px 0 0 -130px;}
+	.server-rotate .rotate .circle .name-8{margin: -120px 0 0 -27px;}
+	.server-rotate .list{padding: 0 20px;}
+	.server-rotate .list li{width: 33.33%;padding: 10px 0;}
 }
 
 @media screen and (max-width: 414px){

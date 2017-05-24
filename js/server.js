@@ -128,7 +128,7 @@ var rotateBanner = {
             obj.css(endCss)
             obj.html(text);
             _timer = setTimeout(function() {
-                console.log('fadeChange');
+                // console.log('fadeChange');
                 obj.removeAttr('style').unbind('transitionend');
                 clearTimeout(_timer);
                 _timer = null;
@@ -185,7 +185,8 @@ var rotateBanner = {
             _this.index = _index;
             _this.rotate = _rotate;
 
-        }, 150)
+            // console.log('1');
+        }, 70)
 
     },
     stop: function() {
@@ -206,7 +207,7 @@ var rotateBanner = {
         var _this = this;
         _this.dom();
         _this.bind();
-        _this.start();
+        // _this.start();
     }
 }
 rotateBanner.init();
