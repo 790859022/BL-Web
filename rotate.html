@@ -8,6 +8,8 @@
 		.rotate{width: 1280px;height: 890px;margin: 50px auto;position: relative;overflow: hidden;}
 		.rotate .left{position: absolute;z-index:1;left: -100%;right: 50%;top: -100%;bottom: -100%;transform-origin: center right;}
 		.rotate .right{position: absolute;z-index:2;right: -100%;left: 50%;top:-100%;bottom: -100%;transform-origin: center left;}
+		.rotate .num{text-align: justify;position: absolute;white-space: nowrap;z-index: 5;top: 20px;left: 20px;font-size: 18px;color: #fff;font-weight: bold;padding-top: 12px;}
+		.rotate .num:before{position: absolute;top: 0;top: 0;width: 100%;height: 4px;background: #FFF;content: '';}
 		.rotate .r-item{position: absolute;top: 0;right: 0;bottom: 0;left: 0;width: 100%;height: 100%;visibility:hidden;}
 		.rotate .r-item-l{position: relative;float: left;width: 50%;height: 100%;}
 		.rotate .r-item-r{position: relative;float: right;width: 50%;height: 100%;}
@@ -64,12 +66,37 @@
 		.rotate .circle .name-6{margin: -7px 0 0 -350px;}
 		.rotate .circle .name-7{margin: -210px 0 0 -270px;}
 		.rotate .circle .name-8{margin: -300px 0 0 -30px;}
+
+		.layer{width: 100px;height: 30px;background: #f00;
+/*			-webkit-animation: fade 1s ease-out forwards;
+			-o-animation: fade 1s ease-out forwards;
+			animation: fade 1s ease-out forwards;*/
+		}
+		@-webkit-keyframes fade {
+			0% {  opacity: 1;}
+			50% { opacity: 0; }
+			100%{opacity: 1;}
+		}
+		@-o-keyframes fade {
+			0% {  opacity: 1;}
+			50% { opacity: 0; }
+			100%{opacity: 1;}
+		}
+		@-moz-keyframes fade {
+			0% {  opacity: 1;}
+			50% { opacity: 0; }
+			100%{opacity: 1;}
+		}
+		@keyframes fade {
+			0% {  opacity: 1;}
+			50% { opacity: 0; }
+			100%{opacity: 1;}
+		};
 	</style>
 </head>
 <body>
 	<div class="rotate">
 		<div class="circle">
-			
 			<span class="name name-1">咨询报价</span>
 			<span class="name name-2">合作确定</span>
 			<span class="name name-3">访谈调研</span>
@@ -89,6 +116,7 @@
 			<span class="big">咨询&nbsp;&nbsp;报价</span>
 			<div class="bg"></div>
 		</div>
+		<div class="num">01</div>
 		<div class="left"></div>
 		<div class="right"></div>
 		<div class="r-item r-item-1">
@@ -124,6 +152,7 @@
 			<div class="r-item-r"></div>
 		</div>
 	</div>
+		<div class="layer"></div>
 		<button>start</button>
 	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 	<script>
@@ -134,10 +163,12 @@
 				_this.container = $('.rotate');
 				_this.leftCover = _this.container.find('.left');
 				_this.rightCover = _this.container.find('.right');
+				_this.num = _this.container.find('.num');
 				_this.circle = _this.container.find('.circle');
 				_this.circleBg = _this.circle.find('.bg');
 				_this.bigText = _this.circle.find('.big');
 				_this.panels = _this.container.find('.r-item');
+
 				_this.timer = null;
 				_this.index = 0;
 			},
@@ -233,7 +264,7 @@
 							transform:'rotate(360deg)',
 							zIndex:1
 						})
-						setTimeout(function(){
+						_timer = setTimeout(function(){
 							$left.removeAttr('style').unbind('transitionend');
 							$right.removeAttr('style').unbind('transitionend');
 							$current.find('.r-item-l').removeAttr('style');
@@ -249,6 +280,22 @@
 
 
 
+			},
+			fadeChange:function(obj,text,startCss,endCss){
+				var _this = this;
+				if(!obj.length) return ;
+				var _timer = null;
+				var _startCss = $.extend({transition:'all .4s'},startCss);
+				obj.css(_startCss).bind('transitionend',function(){
+					obj.css(endCss)
+					obj.html(text);
+					_timer = setTimeout(function(){
+						console.log('fadeChange');
+						obj.removeAttr('style').unbind('transitionend');
+						clearTimeout(_timer);
+						_timer = null;
+					},400)
+				})
 			},
 			start:function(){
 				var _this = this;
@@ -276,17 +323,17 @@
 					var _name = _this.currentName.text();
 					_name = _name.substr(0,2) + '&nbsp;&nbsp;' +_name.substr(2);
 					console.log(_name);
-					_this.bigText.css({
-						transitionProperty:'transform',
-						transitionDuration:'.2s',
-						transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
-						opacity:0
-					})
+
+
+
+					_this.fadeChange(_this.bigText,_name,{opacity:0},{opacity:1})
+					_this.fadeChange(_this.num,'0' + (_index + 1),{opacity:0,width:0},{opacity:1,width:'20px'})
+
 
 					// _this.bigText.html(_name);
 				}
 				_this.timer = setInterval(function(){
-					console.log(_rotate);
+					// console.log(_rotate);
 					_rotate++;
 					_this.circleBg.css({
 						transform:'rotate(' + _rotate + 'deg)'
@@ -336,110 +383,117 @@
 		var $right = $rotate.find('.right');
 		var len = $rotate.find('.r-item').length;
 		var index = 1;
+
+
 		$('button').bind('click',function(){
-			if($rotate.hasClass('ing')) return;
-			var $current = $('.rotate .r-item-' + index);
-			index = index == len ? 0 : index;
-			var $next = $('.rotate .r-item-' + (index + 1));
-			// console.log(index);
-			var _currentBg = $current.css('backgroundColor');
-			var _nextBg = $next.css('backgroundColor');
-			var _timer = null;
+			$('.layer').css({
+				animation:'fade 1s ease-in-out'
+			})
+		$('.layer').bind('animationend',function(){
+			$(this).attr('style','')
+			$(this).unbind('animationend');
+		});
+			// if($rotate.hasClass('ing')) return;
+			// var $current = $('.rotate .r-item-' + index);
+			// index = index == len ? 0 : index;
+			// var $next = $('.rotate .r-item-' + (index + 1));
+			// // console.log(index);
+			// var _currentBg = $current.css('backgroundColor');
+			// var _nextBg = $next.css('backgroundColor');
+			// var _timer = null;
 
-			$rotate.addClass('ing');
-			if(index%2){
-				$current.find('.r-item-l').css({
-					zIndex:3
-				})
-				$right.css({
-					transitionProperty:'transform',
-					transitionDuration:'.5s',
-					transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
-					transform:'rotate(180deg)',
-					zIndex:1
-				})
-				$left.css({
-					background:_nextBg,
-					transitionProperty:'transform',
-					transitionDuration:'.5s',
-					transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
-					transform:'rotate(180deg)',
-					zIndex:2
-				}).bind('transitionend',function(){
-					$current.css({
-						visibility:'hidden'
-					})
-					$next.css({
-						visibility:'visible'
-					})
-					$right.css({
-						background:_currentBg,
-						transitionProperty:'transform',
-						transitionDuration:'.5s',
-						transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
-						transform:'rotate(360deg)'
-					})
-					_timer = setTimeout(function(){
-						$left.removeAttr('style').unbind('transitionend');
-						$right.removeAttr('style').unbind('transitionend');
-						$current.find('.r-item-l').removeAttr('style');
-						$rotate.removeClass('ing');
-						clearTimeout(_timer);
-						_timer = null;
-						index++;
-					},500);
+			// $rotate.addClass('ing');
+			// if(index%2){
+			// 	$current.find('.r-item-l').css({
+			// 		zIndex:3
+			// 	})
+			// 	$right.css({
+			// 		transitionProperty:'transform',
+			// 		transitionDuration:'.5s',
+			// 		transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+			// 		transform:'rotate(180deg)',
+			// 		zIndex:1
+			// 	})
+			// 	$left.css({
+			// 		background:_nextBg,
+			// 		transitionProperty:'transform',
+			// 		transitionDuration:'.5s',
+			// 		transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+			// 		transform:'rotate(180deg)',
+			// 		zIndex:2
+			// 	}).bind('transitionend',function(){
+			// 		$current.css({
+			// 			visibility:'hidden'
+			// 		})
+			// 		$next.css({
+			// 			visibility:'visible'
+			// 		})
+			// 		$right.css({
+			// 			background:_currentBg,
+			// 			transitionProperty:'transform',
+			// 			transitionDuration:'.5s',
+			// 			transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
+			// 			transform:'rotate(360deg)'
+			// 		})
+			// 		_timer = setTimeout(function(){
+			// 			$left.removeAttr('style').unbind('transitionend');
+			// 			$right.removeAttr('style').unbind('transitionend');
+			// 			$current.find('.r-item-l').removeAttr('style');
+			// 			$rotate.removeClass('ing');
+			// 			clearTimeout(_timer);
+			// 			_timer = null;
+			// 			index++;
+			// 		},500);
 
-				})
+			// 	})
 				
-			}else{
-				$current.find('.r-item-r').css({
-					zIndex:3
-				})
-				$right.css({
-					background:_nextBg,
-					transitionProperty:'transform',
-					transitionDuration:'.5s',
-					transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
-					transform:'rotate(180deg)',
-					zIndex:2,
-				})
+			// }else{
+			// 	$current.find('.r-item-r').css({
+			// 		zIndex:3
+			// 	})
+			// 	$right.css({
+			// 		background:_nextBg,
+			// 		transitionProperty:'transform',
+			// 		transitionDuration:'.5s',
+			// 		transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+			// 		transform:'rotate(180deg)',
+			// 		zIndex:2,
+			// 	})
 
-				$left.css({
-					transitionProperty:'transform',
-					transitionDuration:'.5s',
-					transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
-					transform:'rotate(180deg)',
-					zIndex:1
-				}).bind('transitionend',function(){
-					$current.css({
-						visibility:'hidden'
-					})
-					$next.css({
-						visibility:'visible'
-					})
-					$left.css({
-						background:_currentBg,
-						transitionProperty:'transform',
-						transitionDuration:'.5s',
-						transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
-						transform:'rotate(360deg)',
-						zIndex:1
-					})
-					setTimeout(function(){
-						$left.removeAttr('style').unbind('transitionend');
-						$right.removeAttr('style').unbind('transitionend');
-						$current.find('.r-item-l').removeAttr('style');
-						$rotate.removeClass('ing');
-						clearTimeout(_timer);
-						_timer = null;
+			// 	$left.css({
+			// 		transitionProperty:'transform',
+			// 		transitionDuration:'.5s',
+			// 		transitionTimingFunction:'cubic-bezier(.57,.14,.86,.49)',
+			// 		transform:'rotate(180deg)',
+			// 		zIndex:1
+			// 	}).bind('transitionend',function(){
+			// 		$current.css({
+			// 			visibility:'hidden'
+			// 		})
+			// 		$next.css({
+			// 			visibility:'visible'
+			// 		})
+			// 		$left.css({
+			// 			background:_currentBg,
+			// 			transitionProperty:'transform',
+			// 			transitionDuration:'.5s',
+			// 			transitionTimingFunction:'cubic-bezier(.29,.6,.5,.81)',
+			// 			transform:'rotate(360deg)',
+			// 			zIndex:1
+			// 		})
+			// 		setTimeout(function(){
+			// 			$left.removeAttr('style').unbind('transitionend');
+			// 			$right.removeAttr('style').unbind('transitionend');
+			// 			$current.find('.r-item-l').removeAttr('style');
+			// 			$rotate.removeClass('ing');
+			// 			clearTimeout(_timer);
+			// 			_timer = null;
 
-						index++;
-					},500);
-				})
+			// 			index++;
+			// 		},500);
+			// 	})
 
-			}
-
-
+			// }
 
 		});
 	</script>
