@@ -44,7 +44,7 @@ transition:all 0.6s;
 .bl-2 .b-text{border-right-color:#000;color:#000;}
 .bl-2 .b-text .more{background:#fff;color:#000; margin-top:120px;}
 .bl-2 .b-text .more:after{background:#000;}
-.bl-3 .img-bg{background:url(../images/i-bg02.jpg) center 0 no-repeat;}
+.bl-3 .img-bg{background:url(../images/i-bg02.jpg) 0 0 no-repeat;}
 .bl-3 .b-text .more{background:url(../images/i-bg02.jpg) 30% 60% no-repeat;color:#fff; margin-top:120px;}
 
 .banner-more{background:#00a0e9;height:90px;position:relative;display:block;margin-bottom:135px;}

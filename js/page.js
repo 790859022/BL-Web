@@ -36,6 +36,7 @@ var pagePage = {
 		var _this = this;
 		_this.dom();
 		_this.bind();
+
 	}
 }
 pagePage.init();

@@ -32,6 +32,17 @@ var indexPage = {
                         opacity: 1,
                         top: _top
                     })
+
+                    var _even = 1;
+                    _even = i % 2 ? 1 : -1;
+
+
+                    var bgX = (scrollTop - 500 * i) * 0.2 * -1;
+                    var bgY = (scrollTop - 500 * i) * 0.2 * -1;
+                    $img.css({
+                        // backgroundPosition:bgX + 'px ' + bgY + 'px',
+                        backgroundSize: (1600 - bgX * _even) + 'px ' + (980 - bgY * _even) + 'px'
+                    })
                 }
             });
         }
@@ -64,10 +75,10 @@ var indexPage = {
             })
         }
 
-        (clientType.pc != 'mobile') && scrollBanner();//非移动端执行动画
+        (clientType.pc != 'mobile') && scrollBanner(); //非移动端执行动画
         scrollAbout2();
         $(window).bind('scroll', function() {
-            (clientType.pc != 'mobile') && scrollBanner();//非移动端执行动画
+            (clientType.pc != 'mobile') && scrollBanner(); //非移动端执行动画
             (!_this.about2.hasClass('show')) && scrollAbout2();
         });
     },
