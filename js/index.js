@@ -63,22 +63,22 @@ var indexPage = {
                 }
 
                 $this.hasClass('show') && setTimeout(function() {
-                    var clsj = new CountUp("clsj", 0, 8, 0, 2);
+                    var clsj = new CountUp("clsj", 0, 8, 0, 1);
                     clsj.start();
-                    var jx = new CountUp("jx", 0, 11, 0, 2);
+                    var jx = new CountUp("jx", 0, 11, 0, 1);
                     jx.start();
-                    var alsl = new CountUp("alsl", 0, 343, 0, 4);
+                    var alsl = new CountUp("alsl", 0, 343, 0, 1);
                     alsl.start();
-                    var sjxm = new CountUp("sjxm", 0, 1250, 0, 6);
+                    var sjxm = new CountUp("sjxm", 0, 1250, 0, 1.5);
                     sjxm.start();
                 }, 2000)
             })
         }
 
-        (clientType.pc != 'mobile') && scrollBanner(); //非移动端执行动画
+        // (clientType.pc != 'mobile') && scrollBanner(); //非移动端执行动画
         scrollAbout2();
         $(window).bind('scroll', function() {
-            (clientType.pc != 'mobile') && scrollBanner(); //非移动端执行动画
+            // (clientType.pc != 'mobile') && scrollBanner(); //非移动端执行动画
             (!_this.about2.hasClass('show')) && scrollAbout2();
         });
     },
