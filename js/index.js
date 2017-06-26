@@ -11,41 +11,6 @@ var indexPage = {
     bannerScroll: function() {
         var _this = this;
 
-        function scrollBanner() {
-            _this.bannerLayer.each(function(i) {
-                var $this = $(this);
-                var $text = $this.find('.b-text');
-                var $img = $this.find('.img-bg');
-                var currentPosTop = $this.position().top;
-                var currentH = $this.height();
-                var winH = $(window).height();
-                var scrollTop = $(window).scrollTop();
-
-                $text.css({
-                    paddingTop: '310px',
-                    opacity: 0
-                })
-
-                if (currentPosTop <= (scrollTop + winH)) {
-                    var _top = (scrollTop + winH - currentPosTop) / 4 * -1;
-                    $text.css({
-                        opacity: 1,
-                        top: _top
-                    })
-
-                    var _even = 1;
-                    _even = i % 2 ? 1 : -1;
-
-
-                    var bgX = (scrollTop - 500 * i) * 0.2 * -1;
-                    var bgY = (scrollTop - 500 * i) * 0.2 * -1;
-                    $img.css({
-                        // backgroundPosition:bgX + 'px ' + bgY + 'px',
-                        backgroundSize: (1600 - bgX * _even) + 'px ' + (980 - bgY * _even) + 'px'
-                    })
-                }
-            });
-        }
 
         function scrollAbout2() {
             _this.about2.each(function() {
@@ -75,7 +40,7 @@ var indexPage = {
             })
         }
 
-        // (clientType.pc != 'mobile') && scrollBanner(); //非移动端执行动画
+
         scrollAbout2();
         $(window).bind('scroll', function() {
             // (clientType.pc != 'mobile') && scrollBanner(); //非移动端执行动画
@@ -109,10 +74,61 @@ var indexPage = {
         _this.bannerScroll();
         _this.partnerFunc();
     },
+    scrollBanner: function() {
+        var _this = this;
+
+        var _scrollParam = 1;
+        _this.bannerLayer.each(function(i) {
+            var $this = $(this);
+            var $text = $this.find('.b-text');
+            var $textT = $text.find('.text');
+            var $bg = $this.find('.img-bg');
+            var $line = $this.find('.line');
+            var _scrollTop = $(window).scrollTop();
+
+
+            var _posY = $this.offset().top;
+            var _w = $this.width();
+            var _h = $this.height();
+
+            if ((_scrollTop * _scrollParam + _h / 2) >= _posY) {
+                $text.css({
+                    marginTop: ((_scrollTop * _scrollParam + _h / 2) - _posY) * -2
+                })
+            }
+        });
+
+        $(window).bind('scroll', function() {
+            // console.log($(window).scrollTop());
+            var _scrollTop = $(window).scrollTop();
+            _this.bannerLayer.each(function(i) {
+                var $this = $(this);
+                var $text = $this.find('.b-text');
+                var $bg = $this.find('.img-bg');
+
+                var _index = i + 1;
+                var _posY = $this.offset().top;
+                var _h = $this.height();
+                if ((_scrollTop * _scrollParam + _h / 2) >= _posY) {
+                    $text.css({
+                        marginTop: ((_scrollTop * _scrollParam + _h / 2) - _posY) * -2
+                    })
+                }
+            });
+        });
+
+
+
+    },
     init: function() {
         var _this = this;
         _this.dom();
         _this.bind();
+
+        (clientType.pc != 'mobile') && _this.scrollBanner(); //非移动端执行动画
+
+
+
 
     }
 }
@@ -125,7 +141,5 @@ $(function() {
         effect: 'fade',
         autoplay: '3000'
     });
-
-
 
 });

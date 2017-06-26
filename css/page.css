@@ -228,7 +228,6 @@ transition: all 0.5s;color: #999;display: block;white-space: nowrap;overflow: hi
 .news-detail .other .next:hover span{padding-left: 1.5em;padding-right: .5em;}
 .news-detail .other .next span:before{-webkit-transition: all .5s; -o-transition: all .5s; transition: all .5s;position: absolute;content: '';right: 0;bottom: 0;height: 0px;border-left: 1px solid #000; -webkit-transform-origin: left bottom; -moz-transform-origin: left bottom; -ms-transform-origin: left bottom; -o-transform-origin: left bottom; transform-origin: left bottom; -webkit-transform: rotate(-45deg); -ms-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);}
 .news-detail .other .next:hover span:before{border-color: #00a0e9;height: 6px;}
-
 .news-detail .other .prev span{padding-left: 2em;}
 .news-detail .other .prev span:before{-webkit-transition: all .5s; -o-transition: all .5s; transition: all .5s;position: absolute;content: '';left: 0;bottom: 0;height: 0px;border-left: 1px solid #000; -webkit-transform-origin: left bottom; -moz-transform-origin: left bottom; -ms-transform-origin: left bottom; -o-transform-origin: left bottom; transform-origin: left bottom; -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); -o-transform: rotate(45deg); transform: rotate(45deg);}
 .news-detail .other .prev:hover span:before{border-color: #00a0e9;height: 6px;}

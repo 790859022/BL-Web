@@ -414,7 +414,7 @@
                             this.show(box);
                             continue;
                         }else{
-                          console.log('hide');
+                          // console.log('hide');
                         }
                         _results.push(box);
                     }

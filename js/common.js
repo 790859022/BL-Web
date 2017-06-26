@@ -3,6 +3,7 @@ var commonJs = {
         var _this = this;
         _this.nav = $('.navbar');
         _this.footer = $('.footer');
+        _this.aside = $('.common-aside');
     },
     // 判断是否是手机端浏览器  
     getBrowser: function() {
@@ -160,10 +161,19 @@ var commonJs = {
             }
         });
     },
+    asideFunc:function(){
+        var _this = this;
+        _this.aside.on('click','.endTop',function(){
+            $('html,body').animate({
+                scrollTop:0
+            },500)
+        });
+    },
     bind: function() {
         var _this = this;
         _this.footerPos();
         _this.navScroll();
+        _this.asideFunc();
 
     },
     init: function() {
